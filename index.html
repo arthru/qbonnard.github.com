@@ -1,0 +1,14 @@
+---
+layout: default
+title: Q's tech' 'blog
+---
+
+<div id="home">
+  <p>Hi! I'm Quentin. I focus on a little bit of everything. I'll publish related stuff here. Feel free to improve on it using the associated <a href="https://github.com/qbonnard/qbonnard.github.com">GitHub repository</a>.</p>
+  <h1>Posts</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
