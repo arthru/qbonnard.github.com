@@ -15,11 +15,12 @@ ln -s ~/configs/.bash_alias ~/.bash_alias
 ln -s ~/configs/Templates ~/Templates
 {% endhighlight %}
 
+I use my own server as a host of my SparkleShare projects, and I want to use my configuration files on this server.
 
 My adventures in finding a solution
 ===================================
 
-I use my own server as a host of my SparkleShare projects, and I want to use my configuration files on this server. I started to search for some headless SparkleShare daemon that would synchronize the `configs` folder with the git repository that SparkleShare uses as a synchronization hub. Apparently there is a headless version of SparkleShare, but it doesn't seem very clean, so I started playing with the git repository. Puzzled by the `--bare` option, I found a post explaining [how to auto-publish a website using git](http://sitaramc.github.com/tips/auto-publish.html). It provided me with a solution to my problem, in combination with the [instructions to set up my own server from SparkleShare](https://github.com/hbons/SparkleShare/wiki/How-to-set-up-your-own-server).
+I started to search for some headless SparkleShare daemon that would synchronize the `configs` folder with the git repository that SparkleShare uses as a synchronization hub. Apparently there is a headless version of SparkleShare, but it doesn't seem very clean, so I started playing with the git repository. Puzzled by the `--bare` option, I found a post explaining [how to auto-publish a website using git](http://sitaramc.github.com/tips/auto-publish.html). It provided me with a solution to my problem, in combination with the [instructions to set up my own server from SparkleShare](https://github.com/hbons/SparkleShare/wiki/How-to-set-up-your-own-server).
 
 Example
 =======
@@ -42,7 +43,6 @@ git checkout -f
 EOF
 chmod +x hooks/post-receive
 {% endhighlight %}
-
 
 Conclusion
 ==========
