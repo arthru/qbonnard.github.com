@@ -11,7 +11,6 @@ layout: nil
  <id>http://qbonnard.github.com/</id>
  <author>
    <name>Quentin Bonnard</name>
-   <email>tom@mojombo.com</email>
  </author>
 
  {% for post in site.posts %}
