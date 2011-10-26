@@ -29,7 +29,7 @@ Noting that applying one of the binary operations will leave us with one less te
 
 `(n-1)! * k^n`
 
-possibilities to try. It's good that `n` is upper-bounded by `6`...
+possibilities to try. It's good that "my fellow nerds" found that `n` does not have to be greater than `6`...
 
 Now the problem is that unary operations can be applied as often as possible. They can be applied to any of the initial numbers, and to any of the results of the binary operations. However, no factorial is a square (except 1), so we can apply the square root first (as many times as we want), and then the factorial, without trying to interleave them. If we apply up to `s` times square root on each possible term (i.e. the `n` initial numbers and the `n-1` results of binary operations), and up to `f` times the factorial on each possible term, that gives us a grand total of
 
@@ -44,6 +44,35 @@ To summarize, we can describe a candidate with:
 * `n` values in the `[0,s]` range to code how many square roots are applied to the `n` initial values, and `n-1` more in the `[0,s]` range for the square root applications of each result of the binary operations,
 * similarly, `n + n-1` values in the `[0,f]` range for the factorials.
 
+They say a picture is worth a thousand word. The ratio may be a little lower with ascii art, but let's illustrate these four list item with the winning candidate, i.e. `(1+2)!! + 3!^4 - 5`. Its evaluation tree looks like that:
+
+    1 ---
+         \
+          3 - 6 - 720 ----
+         /                \
+    2 ---                  \
+                            2016
+    3 - 6 -----------      /    \
+                     \    /      \
+                      1296        \
+                     /             2011
+    4 ---------------             /
+                                 /
+                                /
+    5 --------------------------
+
+Beautiful. The binary operations (merging branches) are:
+          +          ^      +      -
+If `+`, `-`, `*`, `/`, `^` are respectively coded by 1,2,3,4,5, the second list item will be `(1,5,1,2)`.
+
+The binary operations are applied to the following pair of operands:
+          1          3      1      1
+which gives us `(1,2,1,1)` for the first list item. Note that each of these four numbers have been respectively chosen from `[1,2,3,4]`, `[1,2,3]`, `[1,2]`, `[1]`, which correspond to `[(1,2), (2,6), (6,4), (4,5)]`, `[(720,6), (6,4), (4,5)]`, `[(720,1296), (1296,5)]`, `[(2016,5)]`, still respectively. It's all about respect.
+
+No square root is applied on the initial numbers, and no square root is applied on intermediary result either, so the third list item is `(0,0,0,0,0)` and `(0,0,0,0)`.
+
+Factorial is applied once on the third initial number (a.k.a. `3`), and twice on the result of the first operation, which gives `(0,0,1,0,0)` and `(2,0,0,0)` for the fourth list item.
+    
 Implementation overview
 =======================
 
@@ -54,7 +83,7 @@ Using these data structure, I wrote `CandidateEnumeration`, a class that fully d
 
 The evaluation method creates an array of the `n` initial numbers, and applies the operations coded in the `ExhaustiveEnumeration` members, until the array is reduced to the ultimate result. If an illegal operation (e.g. divide by 0 or negative square root) is detected, the evaluation is aborted.
 
-The rest of the code is basically here only to output the result or the progress.
+The rest of the code is basically here only to output the result or the progress. And of course, indices start at 0 rather than at 1 as in the previous section. And the final binary operation is actually the first of the array of the `CandidateEnumeration`... Enjoy!
 
 Code
 ====
