@@ -66,7 +66,7 @@ Code
 Limitations
 ===========
 
-The main limitation of this code is that the number representation (`double`) does not allow to compute the factorial of numbers above 20, which aborts the computation of potentially correct candidates. The use of `double` also results in false positive due to rounding errors.
+The main limitation of this code is that the number representation (`long`) does not allow to compute the factorial of numbers above 20, which aborts the computation of potentially correct candidates. The use of `double` also results in false positive due to rounding errors.
 
 The limitation to this brute force algorithm in general is that there is obviously no end in the increase of the number of application of factorial and square root. I can't think of an upper bound on `f` and `s` after which there is no possible solution anymore.
 
